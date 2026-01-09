@@ -1,7 +1,9 @@
 import Image from 'next/image';
 
+import { FadeIn } from '@/components/motion/FadeIn';
 import { AttentionBanner } from '@/components/site/AttentionBanner';
 import { BookingForm } from '@/components/site/BookingForm';
+import { FloatingCallButton } from '@/components/site/FloatingCallButton';
 import { ServicesGrid } from '@/components/site/ServicesGrid';
 import { ButtonLink } from '@/components/ui/Button';
 import { Container } from '@/components/ui/Container';
@@ -19,7 +21,7 @@ export default function HomePage() {
         </div>
 
         <Container className="grid gap-10 py-14 md:grid-cols-12 md:items-center md:gap-8 md:py-20">
-          <div className="md:col-span-6">
+          <FadeIn className="md:col-span-6">
             <div className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-3 py-1 text-xs font-semibold text-black/70 shadow-sm">
               <span className="h-2 w-2 rounded-full bg-green-500" />
               24/7 erreichbar in Münster / Hiltrup
@@ -62,9 +64,9 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
-          </div>
+          </FadeIn>
 
-          <div className="md:col-span-6">
+          <FadeIn className="md:col-span-6" delay={0.08}>
             <div className="relative rounded-3xl border border-black/10 bg-gradient-to-br from-taxi-yellow/25 to-white p-6 shadow-sm">
               <div className="flex items-center justify-between">
                 <div className="text-sm font-semibold text-black/70">
@@ -81,7 +83,7 @@ export default function HomePage() {
                 <BookingForm />
               </div>
             </div>
-          </div>
+          </FadeIn>
         </Container>
       </section>
 
@@ -107,6 +109,8 @@ export default function HomePage() {
           </div>
         </Container>
       </section>
+
+      <FloatingCallButton />
     </>
   );
 }

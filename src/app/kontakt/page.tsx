@@ -11,10 +11,18 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
-  const query = encodeURIComponent(
-    `${address.street}, ${address.zip} ${address.city}, Deutschland`
-  );
-  const osmEmbed = `https://www.openstreetmap.org/export/embed.html?search=${query}&layer=mapnik`;
+  // Coordinates from the original site's geo meta tags.
+  const lat = 51.904241;
+  const lon = 7.636477;
+  const bbox = [
+    lon - 0.02,
+    lat - 0.01,
+    lon + 0.02,
+    lat + 0.01,
+  ]
+    .map((n) => n.toFixed(6))
+    .join('%2C');
+  const osmEmbed = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${lat}%2C${lon}`;
 
   return (
     <>

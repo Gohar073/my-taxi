@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
 
 import './globals.css';
+import { MotionProvider } from '@/components/motion/MotionProvider';
 import { Footer } from '@/components/site/Footer';
 import { Header } from '@/components/site/Header';
 
@@ -74,9 +75,11 @@ export default function RootLayout({
             }),
           }}
         />
-        <Header />
-        <main className="min-h-[calc(100dvh-64px)]">{children}</main>
-        <Footer />
+        <MotionProvider>
+          <Header />
+          <main className="min-h-[calc(100dvh-64px)]">{children}</main>
+          <Footer />
+        </MotionProvider>
       </body>
     </html>
   );

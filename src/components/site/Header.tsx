@@ -2,7 +2,9 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useMemo, useState } from 'react';
+import { m } from 'framer-motion';
 
 import { ButtonLink } from '@/components/ui/Button';
 import { Container } from '@/components/ui/Container';
@@ -11,6 +13,8 @@ import { navLinks, phoneHref, phoneNumber } from '@/lib/navigation';
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const pathname = usePathname();
 
   const services = useMemo(() => {
     const found = navLinks.find((l) => 'children' in l);
@@ -35,39 +39,87 @@ export function Header() {
         </Link>
 
         <nav className="hidden items-center gap-7 md:flex">
-          <Link className="text-sm font-semibold hover:opacity-80" href="/">
+          <Link
+            className={cn(
+              'text-sm font-semibold transition hover:opacity-80',
+              pathname === '/' ? 'text-black' : 'text-black/80'
+            )}
+            href="/"
+          >
             Start
           </Link>
 
-          <div className="group relative">
+          <div
+            className="relative"
+            onMouseEnter={() => setServicesOpen(true)}
+            onMouseLeave={() => setServicesOpen(false)}
+          >
             <button
               type="button"
-              className="flex items-center gap-2 text-sm font-semibold hover:opacity-80"
+              className={cn(
+                'flex items-center gap-2 text-sm font-semibold transition hover:opacity-80',
+                pathname?.startsWith('/transport') ||
+                  pathname?.startsWith('/flughafentransfer') ||
+                  pathname?.startsWith('/krankentransport') ||
+                  pathname?.startsWith('/rollstuhltransport')
+                  ? 'text-black'
+                  : 'text-black/80'
+              )}
             >
               Services
               <span className="text-xs opacity-70">▾</span>
             </button>
-            <div className="pointer-events-none absolute left-0 top-full mt-2 w-64 translate-y-1 rounded-2xl border border-black/10 bg-white p-2 opacity-0 shadow-lg transition group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100">
+            <m.div
+              className={cn(
+                'absolute left-0 top-full mt-2 w-72 rounded-2xl border border-black/10 bg-white p-2 shadow-lg',
+                servicesOpen ? 'pointer-events-auto' : 'pointer-events-none'
+              )}
+              initial={false}
+              animate={
+                servicesOpen
+                  ? { opacity: 1, y: 0, scale: 1 }
+                  : { opacity: 0, y: 10, scale: 0.98 }
+              }
+              transition={{ duration: 0.18, ease: [0.21, 0.47, 0.32, 0.98] }}
+            >
               {services.map((s) => (
-                <Link
+                <m.div
                   key={s.href}
-                  href={s.href}
-                  className="block rounded-xl px-3 py-2 text-sm font-medium hover:bg-black/5"
+                  initial={false}
+                  animate={servicesOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: -6 }}
+                  transition={{ duration: 0.18, ease: 'easeOut' }}
                 >
-                  {s.label}
-                </Link>
+                  <Link
+                    href={s.href}
+                    className={cn(
+                      'block rounded-xl px-3 py-2 text-sm font-semibold transition hover:bg-black/5',
+                      pathname === s.href
+                        ? 'bg-black/5 text-black'
+                        : 'text-black/80'
+                    )}
+                    onClick={() => setServicesOpen(false)}
+                  >
+                    {s.label}
+                  </Link>
+                </m.div>
               ))}
-            </div>
+            </m.div>
           </div>
 
           <Link
-            className="text-sm font-semibold hover:opacity-80"
+            className={cn(
+              'text-sm font-semibold transition hover:opacity-80',
+              pathname === '/taxi70-in-muenster' ? 'text-black' : 'text-black/80'
+            )}
             href="/taxi70-in-muenster"
           >
             Taxi in Münster
           </Link>
           <Link
-            className="text-sm font-semibold hover:opacity-80"
+            className={cn(
+              'text-sm font-semibold transition hover:opacity-80',
+              pathname === '/kontakt' ? 'text-black' : 'text-black/80'
+            )}
             href="/kontakt"
           >
             Kontakt
