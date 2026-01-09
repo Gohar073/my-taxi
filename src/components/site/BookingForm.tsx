@@ -1,8 +1,13 @@
 'use client';
 
-import { useId, useMemo, useState } from 'react';
+import { useId, useMemo, useState, useEffect } from 'react';
 
 import { Button } from '@/components/ui/Button';
+import { Input } from '@/components/ui/Input';
+import { Textarea } from '@/components/ui/Textarea';
+import { Select } from '@/components/ui/Select';
+import { Checkbox } from '@/components/ui/Checkbox';
+import { Radio } from '@/components/ui/Radio';
 import { cn } from '@/lib/cn';
 
 type BookingMode = 'Taxi Bestellung' | 'Preisanfrage';
@@ -58,8 +63,8 @@ export function BookingForm() {
 
   const [state, setState] = useState<BookingFormState>({
     mode: 'Taxi Bestellung',
-    date: todayDE(),
-    time: nowHHMM(),
+    date: '',
+    time: '',
     passengers: passengerOptions[0].value,
     from: '',
     to: '',
@@ -72,6 +77,18 @@ export function BookingForm() {
     dsgvo: false,
     website: '',
   });
+
+  // Set default date/time only on client to avoid hydration mismatch
+  useEffect(() => {
+    if (!state.date && !state.time) {
+      setState((prev) => ({
+        ...prev,
+        date: todayDE(),
+        time: nowHHMM(),
+      }));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const errors = useMemo(() => {
     const e: Partial<Record<keyof BookingFormState, string>> = {};
@@ -151,247 +168,160 @@ export function BookingForm() {
     <form
       id="bestellen"
       aria-labelledby={`${formId}-title`}
-      className="rounded-3xl border border-black/10 bg-white p-6 shadow-sm md:p-8"
+      className="rounded-3xl border border-taxi-gray/30 bg-gradient-card p-8 shadow-glass backdrop-blur-xl md:p-10"
       onSubmit={onSubmit}
     >
-      <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <h2 id={`${formId}-title`} className="text-xl font-black tracking-tight">
-            Taxi bestellen / Preisanfrage
-          </h2>
-          <p className="mt-1 text-sm text-black/70">
-            Schnell anfragen – wir melden uns zeitnah zurück.
-          </p>
-        </div>
+      <div className="mb-8 border-b border-taxi-gray/20 pb-6">
+        <h2 id={`${formId}-title`} className="text-2xl font-black tracking-tight text-taxi-surface-bright md:text-3xl">
+          Taxi bestellen / Preisanfrage
+        </h2>
+        <p className="mt-2 text-sm text-taxi-gray-light leading-relaxed">
+          Schnell anfragen – wir melden uns zeitnah zurück.
+        </p>
       </div>
 
-      <div className="mt-6 grid gap-3 sm:grid-cols-2">
-        <fieldset className="col-span-full rounded-2xl border border-black/10 p-4">
-          <legend className="px-2 text-sm font-semibold text-black/70">
+      <div className="grid gap-6 sm:grid-cols-2">
+        <fieldset className="col-span-full rounded-2xl border border-taxi-gray/30 bg-gradient-glass p-5 backdrop-blur-md">
+          <legend className="px-3 text-sm font-bold uppercase tracking-wider text-taxi-gray-light">
             Anfrage-Art
           </legend>
-          <div className="mt-2 flex flex-wrap gap-4">
+          <div className="mt-4 flex flex-wrap gap-6">
             {(['Taxi Bestellung', 'Preisanfrage'] as const).map((mode) => (
-              <label key={mode} className="inline-flex items-center gap-2">
-                <input
-                  type="radio"
-                  name="mode"
-                  value={mode}
-                  checked={state.mode === mode}
-                  onChange={() => setState((s) => ({ ...s, mode }))}
-                />
-                <span className="text-sm font-semibold">{mode}</span>
-              </label>
+              <Radio
+                key={mode}
+                name="mode"
+                value={mode}
+                checked={state.mode === mode}
+                onChange={() => setState((s) => ({ ...s, mode }))}
+                label={mode}
+                className="flex-1 min-w-[140px]"
+              />
             ))}
           </div>
         </fieldset>
 
-        <div>
-          <label className="text-sm font-semibold">
-            Datum <span className="text-red-600">*</span>
-          </label>
-          <input
-            className={cn(
-              'mt-1 h-11 w-full rounded-xl border px-3 text-sm',
-              errors.date ? 'border-red-400' : 'border-black/15'
-            )}
-            value={state.date}
-            onChange={(e) => setState((s) => ({ ...s, date: e.target.value }))}
-            placeholder={todayDE()}
-            inputMode="numeric"
-          />
-          {errors.date ? (
-            <div className="mt-1 text-xs font-semibold text-red-600">
-              {errors.date}
-            </div>
-          ) : null}
-        </div>
+        <Input
+          label="Datum"
+          type="text"
+          value={state.date}
+          onChange={(e) => setState((s) => ({ ...s, date: e.target.value }))}
+          placeholder={todayDE()}
+          inputMode="numeric"
+          required
+          error={errors.date}
+        />
 
-        <div>
-          <label className="text-sm font-semibold">
-            Uhrzeit <span className="text-red-600">*</span>
-          </label>
-          <input
-            className={cn(
-              'mt-1 h-11 w-full rounded-xl border px-3 text-sm',
-              errors.time ? 'border-red-400' : 'border-black/15'
-            )}
-            value={state.time}
-            onChange={(e) => setState((s) => ({ ...s, time: e.target.value }))}
-            placeholder={nowHHMM()}
-            inputMode="numeric"
-          />
-          {errors.time ? (
-            <div className="mt-1 text-xs font-semibold text-red-600">
-              {errors.time}
-            </div>
-          ) : null}
-        </div>
+        <Input
+          label="Uhrzeit"
+          type="text"
+          value={state.time}
+          onChange={(e) => setState((s) => ({ ...s, time: e.target.value }))}
+          placeholder={nowHHMM()}
+          inputMode="numeric"
+          required
+          error={errors.time}
+        />
 
         <div className="sm:col-span-2">
-          <label className="text-sm font-semibold">
-            Anzahl <span className="text-red-600">*</span>
-          </label>
-          <select
-            className={cn(
-              'mt-1 h-11 w-full rounded-xl border px-3 text-sm',
-              errors.passengers ? 'border-red-400' : 'border-black/15'
-            )}
+          <Select
+            label="Anzahl"
             value={state.passengers}
             onChange={(e) =>
               setState((s) => ({ ...s, passengers: e.target.value }))
             }
+            required
+            error={errors.passengers}
+            hint='Mehr? Bitte in "Nachricht" angeben.'
           >
             {passengerOptions.map((o) => (
-              <option key={o.value} value={o.value}>
+              <option key={o.value} value={o.value} className="bg-taxi-surface-light">
                 {o.label}
               </option>
             ))}
-          </select>
-          <p className="mt-1 text-xs text-black/60">
-            Mehr? Bitte in „Nachricht“ angeben.
-          </p>
+          </Select>
         </div>
 
-        <div className="sm:col-span-2">
-          <label className="text-sm font-semibold">
-            Von <span className="text-red-600">*</span>
-          </label>
-          <input
-            className={cn(
-              'mt-1 h-11 w-full rounded-xl border px-3 text-sm',
-              errors.from ? 'border-red-400' : 'border-black/15'
-            )}
-            value={state.from}
-            onChange={(e) => setState((s) => ({ ...s, from: e.target.value }))}
-            placeholder="Abholort"
-          />
-          {errors.from ? (
-            <div className="mt-1 text-xs font-semibold text-red-600">
-              {errors.from}
-            </div>
-          ) : null}
-        </div>
+        <Input
+          label="Von"
+          value={state.from}
+          onChange={(e) => setState((s) => ({ ...s, from: e.target.value }))}
+          placeholder="Abholort"
+          required
+          error={errors.from}
+          className="sm:col-span-2"
+        />
 
-        <div className="sm:col-span-2">
-          <label className="text-sm font-semibold">
-            Nach <span className="text-red-600">*</span>
-          </label>
-          <input
-            className={cn(
-              'mt-1 h-11 w-full rounded-xl border px-3 text-sm',
-              errors.to ? 'border-red-400' : 'border-black/15'
-            )}
-            value={state.to}
-            onChange={(e) => setState((s) => ({ ...s, to: e.target.value }))}
-            placeholder="Zielort"
-          />
-          {errors.to ? (
-            <div className="mt-1 text-xs font-semibold text-red-600">
-              {errors.to}
-            </div>
-          ) : null}
-        </div>
+        <Input
+          label="Nach"
+          value={state.to}
+          onChange={(e) => setState((s) => ({ ...s, to: e.target.value }))}
+          placeholder="Zielort"
+          required
+          error={errors.to}
+          className="sm:col-span-2"
+        />
 
-        <div>
-          <label className="text-sm font-semibold">
-            Name <span className="text-red-600">*</span>
-          </label>
-          <input
-            className={cn(
-              'mt-1 h-11 w-full rounded-xl border px-3 text-sm',
-              errors.name ? 'border-red-400' : 'border-black/15'
-            )}
-            value={state.name}
-            onChange={(e) => setState((s) => ({ ...s, name: e.target.value }))}
-            placeholder="Ihr Name"
-          />
-          {errors.name ? (
-            <div className="mt-1 text-xs font-semibold text-red-600">
-              {errors.name}
-            </div>
-          ) : null}
-        </div>
+        <Input
+          label="Name"
+          value={state.name}
+          onChange={(e) => setState((s) => ({ ...s, name: e.target.value }))}
+          placeholder="Ihr Name"
+          required
+          error={errors.name}
+        />
 
-        <div>
-          <label className="text-sm font-semibold">
-            E-Mail <span className="text-red-600">*</span>
-          </label>
-          <input
-            className={cn(
-              'mt-1 h-11 w-full rounded-xl border px-3 text-sm',
-              errors.email ? 'border-red-400' : 'border-black/15'
-            )}
-            value={state.email}
-            onChange={(e) => setState((s) => ({ ...s, email: e.target.value }))}
-            placeholder="name@example.com"
-            type="email"
-            autoComplete="email"
-          />
-          {errors.email ? (
-            <div className="mt-1 text-xs font-semibold text-red-600">
-              {errors.email}
-            </div>
-          ) : null}
-        </div>
+        <Input
+          label="E-Mail"
+          type="email"
+          value={state.email}
+          onChange={(e) => setState((s) => ({ ...s, email: e.target.value }))}
+          placeholder="name@example.com"
+          autoComplete="email"
+          required
+          error={errors.email}
+        />
 
-        <div className="sm:col-span-2">
-          <label className="text-sm font-semibold">
-            Telefon <span className="text-red-600">*</span>
-          </label>
-          <input
-            className={cn(
-              'mt-1 h-11 w-full rounded-xl border px-3 text-sm',
-              errors.phone ? 'border-red-400' : 'border-black/15'
-            )}
-            value={state.phone}
-            onChange={(e) => setState((s) => ({ ...s, phone: e.target.value }))}
-            placeholder="+49 …"
-            type="tel"
-            autoComplete="tel"
-          />
-          {errors.phone ? (
-            <div className="mt-1 text-xs font-semibold text-red-600">
-              {errors.phone}
-            </div>
-          ) : null}
-        </div>
+        <Input
+          label="Telefon"
+          type="tel"
+          value={state.phone}
+          onChange={(e) => setState((s) => ({ ...s, phone: e.target.value }))}
+          placeholder="+49 …"
+          autoComplete="tel"
+          required
+          error={errors.phone}
+          className="sm:col-span-2"
+        />
 
-        <fieldset className="sm:col-span-2 rounded-2xl border border-black/10 p-4">
-          <legend className="px-2 text-sm font-semibold text-black/70">
+        <fieldset className="sm:col-span-2 rounded-2xl border border-taxi-gray/30 bg-gradient-glass p-5 backdrop-blur-md">
+          <legend className="px-3 text-sm font-bold uppercase tracking-wider text-taxi-gray-light">
             Optionen
           </legend>
-          <div className="mt-2 flex flex-wrap gap-4">
-            <label className="inline-flex items-center gap-2">
-              <input
-                type="checkbox"
-                checked={state.wheelchair}
-                onChange={(e) =>
-                  setState((s) => ({ ...s, wheelchair: e.target.checked }))
-                }
-              />
-              <span className="text-sm font-semibold">Rollstuhltransport</span>
-            </label>
-            <label className="inline-flex items-center gap-2">
-              <input
-                type="checkbox"
-                checked={state.childSeat}
-                onChange={(e) =>
-                  setState((s) => ({ ...s, childSeat: e.target.checked }))
-                }
-              />
-              <span className="text-sm font-semibold">Kindersitz benötigt</span>
-            </label>
+          <div className="mt-4 flex flex-wrap gap-6">
+            <Checkbox
+              checked={state.wheelchair}
+              onChange={(e) =>
+                setState((s) => ({ ...s, wheelchair: e.target.checked }))
+              }
+              label="Rollstuhltransport"
+            />
+            <Checkbox
+              checked={state.childSeat}
+              onChange={(e) =>
+                setState((s) => ({ ...s, childSeat: e.target.checked }))
+              }
+              label="Kindersitz benötigt"
+            />
           </div>
         </fieldset>
 
         <div className="sm:col-span-2">
-          <label className="text-sm font-semibold">Nachricht</label>
-          <textarea
-            className="mt-1 min-h-28 w-full rounded-xl border border-black/15 px-3 py-2 text-sm"
+          <Textarea
+            label="Nachricht"
             value={state.message}
             onChange={(e) => setState((s) => ({ ...s, message: e.target.value }))}
             placeholder="Optional: Details (z.B. Flugnummer, Gepäck, Abholpunkt …)"
+            rows={5}
           />
         </div>
 
@@ -405,26 +335,21 @@ export function BookingForm() {
         />
 
         <div className="sm:col-span-2">
-          <label className="inline-flex items-start gap-3">
-            <input
-              className="mt-1"
-              type="checkbox"
-              checked={state.dsgvo}
-              onChange={(e) => setState((s) => ({ ...s, dsgvo: e.target.checked }))}
-            />
-            <span className="text-sm text-black/80">
-              Ich habe die{' '}
-              <a className="font-semibold underline" href="/datenschutz">
-                Datenschutzerklärung
-              </a>{' '}
-              gelesen und akzeptiere die Verarbeitung meiner Angaben.
-            </span>
-          </label>
-          {errors.dsgvo ? (
-            <div className="mt-1 text-xs font-semibold text-red-600">
-              {errors.dsgvo}
-            </div>
-          ) : null}
+          <Checkbox
+            checked={state.dsgvo}
+            onChange={(e) => setState((s) => ({ ...s, dsgvo: e.target.checked }))}
+            required
+            error={errors.dsgvo}
+            label={
+              <span>
+                Ich habe die{' '}
+                <a className="font-bold text-taxi-secondary underline hover:text-taxi-accent transition-colors" href="/datenschutz">
+                  Datenschutzerklärung
+                </a>{' '}
+                gelesen und akzeptiere die Verarbeitung meiner Angaben.
+              </span>
+            }
+          />
         </div>
 
         <div className="sm:col-span-2">
@@ -433,14 +358,14 @@ export function BookingForm() {
           </Button>
 
           {result.status === 'success' ? (
-            <div className="mt-3 rounded-2xl border border-green-200 bg-green-50 px-4 py-3 text-sm font-semibold text-green-900">
-              Danke! Ihre Anfrage wurde gesendet.
+            <div className="mt-4 rounded-2xl border border-taxi-success/60 bg-taxi-success/25 backdrop-blur-md px-5 py-4 text-sm font-bold text-taxi-success shadow-medium animate-fade-in">
+              ✓ Danke! Ihre Anfrage wurde erfolgreich gesendet.
             </div>
           ) : null}
 
           {result.status === 'error' ? (
-            <div className="mt-3 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-semibold text-red-900">
-              {result.message}
+            <div className="mt-4 rounded-2xl border border-taxi-error/60 bg-taxi-error/25 backdrop-blur-md px-5 py-4 text-sm font-bold text-taxi-error shadow-medium animate-fade-in">
+              ✗ {result.message}
             </div>
           ) : null}
         </div>

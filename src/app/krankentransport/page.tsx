@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 
-import { AttentionBanner } from '@/components/site/AttentionBanner';
 import { PageHero } from '@/components/site/PageHero';
 import { ServicesGrid } from '@/components/site/ServicesGrid';
 import { Container } from '@/components/ui/Container';
@@ -15,31 +14,30 @@ export const metadata: Metadata = {
 export default function MedicalTransportPage() {
   return (
     <>
-      <AttentionBanner />
       <PageHero
         title="Krankentransport"
         subtitle="Sie müssen zum Arzt oder ins Krankenhaus? Unsere freundlichen Fahrer bringen Sie ans Ziel."
       />
 
-      <section className="py-12">
+      <section className="py-12 bg-gradient-surface">
         <Container className="grid gap-10 md:grid-cols-12">
           <div className="md:col-span-7">
-            <h2 className="text-xl font-black tracking-tight">Krankenfahrten</h2>
-            <p className="mt-3 text-black/70">
+            <h2 className="text-xl font-black tracking-tight text-taxi-surface-bright">Krankenfahrten</h2>
+            <p className="mt-3 text-taxi-gray-light">
               Ob Arzttermin, Klinik, Reha oder Therapie: Wir holen Sie pünktlich ab
               und fahren Sie sicher zu Ihrem Termin. Auf Wunsch können Hin- und
               Rückfahrt direkt mitgeplant werden.
             </p>
             <div className="mt-6 grid gap-4 sm:grid-cols-2">
-              <div className="rounded-3xl border border-black/10 bg-white p-5 shadow-sm">
-                <div className="text-sm font-black">Pünktlich</div>
-                <div className="mt-1 text-sm text-black/70">
+              <div className="rounded-3xl border border-taxi-gray/30 bg-gradient-card p-5 shadow-medium hover:shadow-medium transition-shadow">
+                <div className="text-sm font-black text-taxi-surface-bright">Pünktlich</div>
+                <div className="mt-1 text-sm text-taxi-gray-light">
                   Terminzeiten im Blick – zuverlässige Abholung.
                 </div>
               </div>
-              <div className="rounded-3xl border border-black/10 bg-white p-5 shadow-sm">
-                <div className="text-sm font-black">Diskret & freundlich</div>
-                <div className="mt-1 text-sm text-black/70">
+              <div className="rounded-3xl border border-taxi-gray/30 bg-gradient-card p-5 shadow-medium hover:shadow-medium transition-shadow">
+                <div className="text-sm font-black text-taxi-surface-bright">Diskret & freundlich</div>
+                <div className="mt-1 text-sm text-taxi-gray-light">
                   Professioneller Service mit Rücksicht auf Ihre Situation.
                 </div>
               </div>
@@ -47,11 +45,11 @@ export default function MedicalTransportPage() {
           </div>
 
           <div className="md:col-span-5">
-            <div className="rounded-3xl border border-black/10 bg-taxi-yellow/20 p-6">
-              <div className="text-sm font-black">Tipp</div>
-              <p className="mt-2 text-sm text-black/80">
+            <div className="rounded-3xl border border-taxi-secondary/30 bg-gradient-to-br from-taxi-secondary/15 to-taxi-secondary/5 p-6 shadow-medium">
+              <div className="text-sm font-black text-taxi-surface-bright">Tipp</div>
+              <p className="mt-2 text-sm text-taxi-gray-light">
                 Falls ein Rollstuhltransport nötig ist, wählen Sie im Formular auf
-                der Startseite die Option „Rollstuhltransport“.
+                der Startseite die Option „Rollstuhltransport".
               </p>
               <div className="mt-5">
                 <ButtonLink href="/#bestellen">Taxi bestellen</ButtonLink>
@@ -61,7 +59,7 @@ export default function MedicalTransportPage() {
         </Container>
       </section>
 
-      <ServicesGrid className="border-t border-black/10" />
+      <ServicesGrid className="border-t border-taxi-gray/30" />
     </>
   );
 }

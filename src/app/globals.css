@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  color-scheme: light;
+  color-scheme: dark;
 }
 
 html,
@@ -14,11 +14,56 @@ html {
 }
 
 body {
-  background: #ffffff;
-  color: #0b0d12;
+  background: linear-gradient(to bottom, #06090F 0%, #0A0E14 30%, #0F1419 60%, #1A1F29 100%);
+  background-attachment: fixed;
+  color: #F1F5F9;
+  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 ::selection {
-  background: rgba(242, 225, 45, 0.65);
+  background: rgba(255, 215, 0, 0.35);
+  color: #06090F;
+}
+
+::-moz-selection {
+  background: rgba(255, 215, 0, 0.35);
+  color: #06090F;
+}
+
+/* Modern scrollbar styling */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(15, 20, 25, 0.5);
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, rgba(255, 215, 0, 0.3), rgba(255, 215, 0, 0.2));
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, rgba(255, 215, 0, 0.5), rgba(255, 215, 0, 0.4));
+}
+
+/* Input and form element focus styles */
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+}
+
+/* Modern checkbox and radio styling */
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: #FFD700;
 }
 

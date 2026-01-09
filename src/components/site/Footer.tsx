@@ -6,8 +6,9 @@ import { address, legalLinks, phoneHref, phoneNumber } from '@/lib/navigation';
 
 export function Footer() {
   return (
-    <footer className="border-t border-black/10 bg-white">
-      <Container className="py-12">
+    <footer className="border-t border-taxi-gray/30 bg-gradient-primary text-taxi-gray-light relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+      <Container className="py-16 relative">
         <div className="grid gap-10 md:grid-cols-3">
           <div className="space-y-4">
             <Image
@@ -16,15 +17,15 @@ export function Footer() {
               width={130}
               height={48}
             />
-            <p className="max-w-sm text-sm text-black/70">
+            <p className="max-w-sm text-sm text-taxi-gray-light leading-relaxed">
               Zuverlässig. Schnell. Freundlich. Taxi 70 ist Ihr Partner für
               Fahrten in Münster/Hiltrup – 24/7 erreichbar.
             </p>
           </div>
 
-          <div className="space-y-3">
-            <div className="text-sm font-semibold">Kontakt</div>
-            <div className="text-sm text-black/70">
+          <div className="space-y-4">
+            <div className="text-sm font-black text-taxi-surface-bright uppercase tracking-wider">Kontakt</div>
+            <div className="text-sm text-taxi-gray-light space-y-1">
               <div>{address.street}</div>
               <div>
                 {address.zip} {address.city}
@@ -32,27 +33,27 @@ export function Footer() {
             </div>
             <a
               href={phoneHref}
-              className="inline-flex text-sm font-semibold hover:opacity-80"
+              className="inline-flex text-base font-black text-taxi-secondary hover:text-taxi-accent transition-colors"
             >
               {phoneNumber}
             </a>
-            <div className="text-sm text-black/70">24 Stunden erreichbar</div>
+            <div className="text-sm text-taxi-gray">24 Stunden erreichbar</div>
           </div>
 
-          <div className="space-y-3">
-            <div className="text-sm font-semibold">Rechtliches</div>
+          <div className="space-y-4">
+            <div className="text-sm font-black text-taxi-surface-bright uppercase tracking-wider">Rechtliches</div>
             <div className="grid gap-2">
               {legalLinks.map((l) => (
                 <Link
                   key={l.href}
                   href={l.href}
-                  className="text-sm font-semibold text-black/70 hover:text-black"
+                  className="text-sm font-semibold text-taxi-gray-light hover:text-taxi-secondary transition-colors"
                 >
                   {l.label}
                 </Link>
               ))}
             </div>
-            <div className="pt-2 text-xs text-black/50">
+            <div className="pt-4 text-xs text-taxi-gray">
               © {new Date().getFullYear()} Taxi 70. Alle Rechte vorbehalten.
             </div>
           </div>

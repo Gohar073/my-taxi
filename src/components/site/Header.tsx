@@ -22,11 +22,12 @@ export function Header() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-black/10 bg-white/80 backdrop-blur">
-      <Container className="flex h-16 items-center justify-between gap-4">
+    <header className="sticky top-0 z-50 border-b border-taxi-gray/30 bg-gradient-to-r from-taxi-surface/95 via-taxi-surface-light/95 to-taxi-surface/95 backdrop-blur-2xl shadow-glass">
+      <div className="absolute inset-0 bg-gradient-glass opacity-50" />
+      <Container className="relative flex h-20 items-center justify-between gap-4">
         <Link
           href="/"
-          className="flex items-center gap-3 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-taxi-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+          className="flex items-center gap-3 rounded-lg transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-taxi-secondary focus-visible:ring-offset-2 focus-visible:ring-offset-taxi-surface"
         >
           <Image
             src="/inc/img/logo_taxi70.png"
@@ -41,8 +42,10 @@ export function Header() {
         <nav className="hidden items-center gap-7 md:flex">
           <Link
             className={cn(
-              'text-sm font-semibold transition hover:opacity-80',
-              pathname === '/' ? 'text-black' : 'text-black/80'
+              'text-sm font-semibold transition-colors',
+              pathname === '/' 
+                ? 'text-taxi-secondary' 
+                : 'text-taxi-gray-light hover:text-taxi-secondary'
             )}
             href="/"
           >
@@ -57,23 +60,27 @@ export function Header() {
             <button
               type="button"
               className={cn(
-                'flex items-center gap-2 text-sm font-semibold transition hover:opacity-80',
+                'flex items-center gap-2 text-sm font-semibold transition-colors',
                 pathname?.startsWith('/transport') ||
                   pathname?.startsWith('/flughafentransfer') ||
                   pathname?.startsWith('/krankentransport') ||
                   pathname?.startsWith('/rollstuhltransport')
-                  ? 'text-black'
-                  : 'text-black/80'
+                  ? 'text-taxi-secondary'
+                  : 'text-taxi-gray-light hover:text-taxi-secondary'
               )}
             >
               Services
-              <span className="text-xs opacity-70">▾</span>
+              <span className="text-xs text-taxi-gray">▾</span>
             </button>
             <m.div
               className={cn(
-                'absolute left-0 top-full mt-2 w-72 rounded-2xl border border-black/10 bg-white p-2 shadow-lg',
-                servicesOpen ? 'pointer-events-auto' : 'pointer-events-none'
+                'absolute left-0 top-full mt-2 w-72 rounded-2xl border border-taxi-gray/40 bg-gradient-card p-2 shadow-glass backdrop-blur-2xl',
+                servicesOpen ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'
               )}
+              style={{ 
+                backgroundColor: 'rgba(26, 35, 50, 0.95)',
+                backdropFilter: 'blur(20px) saturate(180%)',
+              }}
               initial={false}
               animate={
                 servicesOpen
@@ -92,10 +99,11 @@ export function Header() {
                   <Link
                     href={s.href}
                     className={cn(
-                      'block rounded-xl px-3 py-2 text-sm font-semibold transition hover:bg-black/5',
+                      'block rounded-xl px-4 py-3 text-sm font-bold transition-all duration-200',
+                      'hover:bg-taxi-secondary/20 hover:text-taxi-secondary hover:translate-x-1',
                       pathname === s.href
-                        ? 'bg-black/5 text-black'
-                        : 'text-black/80'
+                        ? 'bg-taxi-secondary/30 text-taxi-secondary shadow-soft border-l-2 border-taxi-secondary'
+                        : 'text-taxi-gray-light hover:border-l-2 hover:border-taxi-secondary/50'
                     )}
                     onClick={() => setServicesOpen(false)}
                   >
@@ -108,8 +116,10 @@ export function Header() {
 
           <Link
             className={cn(
-              'text-sm font-semibold transition hover:opacity-80',
-              pathname === '/taxi70-in-muenster' ? 'text-black' : 'text-black/80'
+              'text-sm font-semibold transition-colors',
+              pathname === '/taxi70-in-muenster' 
+                ? 'text-taxi-secondary' 
+                : 'text-taxi-gray-light hover:text-taxi-secondary'
             )}
             href="/taxi70-in-muenster"
           >
@@ -117,8 +127,10 @@ export function Header() {
           </Link>
           <Link
             className={cn(
-              'text-sm font-semibold transition hover:opacity-80',
-              pathname === '/kontakt' ? 'text-black' : 'text-black/80'
+              'text-sm font-semibold transition-colors',
+              pathname === '/kontakt' 
+                ? 'text-taxi-secondary' 
+                : 'text-taxi-gray-light hover:text-taxi-secondary'
             )}
             href="/kontakt"
           >
@@ -129,7 +141,7 @@ export function Header() {
         <div className="hidden items-center gap-3 md:flex">
           <a
             href={phoneHref}
-            className="text-sm font-semibold text-black/70 hover:text-black"
+            className="text-sm font-semibold text-taxi-gray-light hover:text-taxi-secondary transition-colors"
           >
             {phoneNumber}
           </a>
@@ -140,7 +152,7 @@ export function Header() {
 
         <button
           type="button"
-          className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-black/10 bg-white text-base font-semibold shadow-sm hover:bg-black/5 md:hidden"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-taxi-gray/30 bg-taxi-surface-light text-base font-semibold text-taxi-gray-light shadow-medium hover:bg-taxi-surface-elevated hover:text-taxi-secondary transition-all md:hidden"
           aria-label="Menü öffnen"
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
@@ -152,25 +164,25 @@ export function Header() {
       <div
         className={cn(
           'md:hidden',
-          open ? 'block border-t border-black/10 bg-white' : 'hidden'
+          open ? 'block border-t border-taxi-gray/30 bg-gradient-to-b from-taxi-surface to-taxi-surface-light' : 'hidden'
         )}
       >
         <Container className="py-4">
           <div className="grid gap-2">
             <Link
-              className="rounded-xl px-3 py-2 font-semibold hover:bg-black/5"
+              className="rounded-xl px-3 py-2 font-semibold text-taxi-gray-light hover:bg-taxi-secondary/20 hover:text-taxi-secondary transition-all"
               href="/"
               onClick={() => setOpen(false)}
             >
               Start
             </Link>
-            <div className="mt-2 text-xs font-semibold uppercase tracking-wide text-black/50">
+            <div className="mt-2 text-xs font-semibold uppercase tracking-wide text-taxi-gray">
               Services
             </div>
             {services.map((s) => (
               <Link
                 key={s.href}
-                className="rounded-xl px-3 py-2 font-semibold hover:bg-black/5"
+                className="rounded-xl px-3 py-2 font-semibold text-taxi-gray-light hover:bg-taxi-secondary/20 hover:text-taxi-secondary transition-all"
                 href={s.href}
                 onClick={() => setOpen(false)}
               >
@@ -178,14 +190,14 @@ export function Header() {
               </Link>
             ))}
             <Link
-              className="mt-2 rounded-xl px-3 py-2 font-semibold hover:bg-black/5"
+              className="mt-2 rounded-xl px-3 py-2 font-semibold text-taxi-gray-light hover:bg-taxi-secondary/20 hover:text-taxi-secondary transition-all"
               href="/taxi70-in-muenster"
               onClick={() => setOpen(false)}
             >
               Taxi in Münster
             </Link>
             <Link
-              className="rounded-xl px-3 py-2 font-semibold hover:bg-black/5"
+              className="rounded-xl px-3 py-2 font-semibold text-taxi-gray-light hover:bg-taxi-secondary/20 hover:text-taxi-secondary transition-all"
               href="/kontakt"
               onClick={() => setOpen(false)}
             >
@@ -195,7 +207,7 @@ export function Header() {
             <div className="mt-3 grid gap-2">
               <a
                 href={phoneHref}
-                className="rounded-xl border border-black/10 px-3 py-2 text-center font-semibold"
+                className="rounded-xl border border-taxi-gray/30 bg-taxi-surface-light px-3 py-2 text-center font-semibold text-taxi-gray-light hover:bg-taxi-surface-elevated hover:text-taxi-secondary transition-all shadow-medium"
               >
                 Anrufen: {phoneNumber}
               </a>

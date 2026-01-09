@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 
-import { AttentionBanner } from '@/components/site/AttentionBanner';
 import { PageHero } from '@/components/site/PageHero';
 import { Container } from '@/components/ui/Container';
 import { address, phoneHref, phoneNumber } from '@/lib/navigation';
@@ -26,39 +25,38 @@ export default function ContactPage() {
 
   return (
     <>
-      <AttentionBanner />
       <PageHero title="Kontaktmöglichkeiten" subtitle="Wir sind 24 Stunden erreichbar." />
 
-      <section className="py-12">
+      <section className="py-12 bg-gradient-surface">
         <Container className="grid gap-10 md:grid-cols-12">
           <div className="md:col-span-5">
-            <div className="rounded-3xl border border-black/10 bg-white p-6 shadow-sm">
-              <div className="text-sm font-black">Telefon</div>
+            <div className="rounded-3xl border border-taxi-gray/30 bg-gradient-card p-6 shadow-medium">
+              <div className="text-sm font-black text-taxi-surface-bright">Telefon</div>
               <a
                 href={phoneHref}
-                className="mt-2 inline-flex text-2xl font-black tracking-tight hover:opacity-80"
+                className="mt-2 inline-flex text-2xl font-black tracking-tight text-taxi-secondary hover:text-taxi-surface-bright transition-colors"
               >
                 {phoneNumber}
               </a>
-              <div className="mt-1 text-sm text-black/70">24 Stunden erreichbar</div>
+              <div className="mt-1 text-sm text-taxi-gray-light">24 Stunden erreichbar</div>
 
-              <div className="mt-6 text-sm font-black">Adresse</div>
-              <div className="mt-2 text-sm text-black/70">
+              <div className="mt-6 text-sm font-black text-taxi-surface-bright">Adresse</div>
+              <div className="mt-2 text-sm text-taxi-gray-light">
                 <div>{address.street}</div>
                 <div>
                   {address.zip} {address.city}
                 </div>
               </div>
 
-              <div className="mt-6 rounded-2xl border border-black/10 bg-taxi-yellow/20 px-4 py-3 text-sm text-black/80">
+              <div className="mt-6 rounded-2xl border border-taxi-secondary/30 bg-gradient-to-br from-taxi-secondary/15 to-taxi-secondary/5 px-4 py-3 text-sm text-taxi-gray-light">
                 Tipp: Für Fahrten bitte die Startseite nutzen und das Formular
-                „Taxi bestellen / Preisanfrage“ ausfüllen.
+                „Taxi bestellen / Preisanfrage" ausfüllen.
               </div>
             </div>
           </div>
 
           <div className="md:col-span-7">
-            <div className="overflow-hidden rounded-3xl border border-black/10 bg-white shadow-sm">
+            <div className="overflow-hidden rounded-3xl border border-taxi-gray/30 bg-taxi-surface shadow-medium">
               <iframe
                 title="OpenStreetMap"
                 src={osmEmbed}

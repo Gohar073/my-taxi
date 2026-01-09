@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 
-import { AttentionBanner } from '@/components/site/AttentionBanner';
 import { PageHero } from '@/components/site/PageHero';
 import { ServicesGrid } from '@/components/site/ServicesGrid';
 import { Container } from '@/components/ui/Container';
@@ -14,16 +13,15 @@ export const metadata: Metadata = {
 export default function TransportPage() {
   return (
     <>
-      <AttentionBanner />
       <PageHero
         title="Transport"
         subtitle="Wir über­nehm­­en Ihre Trans­porte – schnell, zuverlässig und professionell."
       />
 
-      <section className="py-12">
+      <section className="py-12 bg-gradient-surface">
         <Container className="prose prose-neutral max-w-none">
-          <h2>Wir über­nehm­­en Ihre Trans­porte</h2>
-          <p>
+          <h2 className="text-taxi-surface-bright">Wir über­nehm­­en Ihre Trans­porte</h2>
+          <p className="text-taxi-gray-light">
             Manchmal muss es eben schnell gehen und wir sind zur Stelle. Wir
             fahren „fast“ alles was in unsere Fahrzeuge passt. Ob Dokumente die
             schnell an einen Geschäftspartner überbracht werden sollen bis hin
@@ -47,7 +45,7 @@ export default function TransportPage() {
         </Container>
       </section>
 
-      <ServicesGrid className="border-t border-black/10" />
+      <ServicesGrid className="border-t border-taxi-gray/30" />
     </>
   );
 }
