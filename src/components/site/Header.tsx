@@ -134,7 +134,6 @@ export function Header() {
                             {s.href === '/transport' && '📦'}
                             {s.href === '/flughafentransfer' && '✈️'}
                             {s.href === '/krankentransport' && '🏥'}
-                            {s.href === '/krankentransport-muenster' && '🚑'}
                             {s.href === '/rollstuhltransport' && '♿'}
                           </span>
                           {s.label}
