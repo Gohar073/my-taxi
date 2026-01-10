@@ -20,7 +20,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         {label && (
           <label
             htmlFor={textareaId}
-            className="mb-2 block text-sm font-semibold text-espresso-700"
+            className="mb-2 block text-sm font-bold text-night-800"
           >
             {label}
             {props.required && <span className="ml-1 text-error">*</span>}
@@ -29,14 +29,14 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         <textarea
           ref={ref}
           className={cn(
-            'min-h-[120px] w-full rounded-xl border bg-white px-4 py-3 text-base font-medium',
-            'text-espresso-800 placeholder:text-espresso-400',
+            'min-h-[120px] w-full rounded-xl border-2 bg-white px-4 py-3 text-base font-medium',
+            'text-night-900 placeholder:text-night-400',
             'transition-all duration-200',
-            'border-espresso-200',
+            'border-night-200',
             'resize-y',
-            'hover:border-brand-300 hover:bg-surface-secondary',
-            'focus:border-brand-500 focus:bg-white focus:outline-none focus:ring-4 focus:ring-brand-100',
-            'disabled:cursor-not-allowed disabled:bg-espresso-50 disabled:text-espresso-400',
+            'hover:border-taxi-400 hover:bg-taxi-50',
+            'focus:border-taxi-500 focus:bg-white focus:outline-none focus:ring-4 focus:ring-taxi-100',
+            'disabled:cursor-not-allowed disabled:bg-night-50 disabled:text-night-400',
             error && 'border-error focus:border-error focus:ring-red-100',
             className
           )}
@@ -44,7 +44,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           id={textareaId}
         />
         {hint && !error && (
-          <p className="mt-1.5 text-xs text-espresso-500">{hint}</p>
+          <p className="mt-1.5 text-xs text-night-500">{hint}</p>
         )}
         {error && (
           <p className="mt-1.5 flex items-center gap-1 text-xs font-medium text-error">

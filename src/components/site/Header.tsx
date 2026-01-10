@@ -36,15 +36,15 @@ export function Header() {
       className={cn(
         'sticky top-0 z-50 transition-all duration-500',
         scrolled
-          ? 'border-b border-espresso-100 bg-white/90 shadow-soft backdrop-blur-xl'
-          : 'bg-transparent'
+          ? 'border-b border-taxi-200 bg-white/95 shadow-medium backdrop-blur-xl'
+          : 'bg-taxi-500/10 backdrop-blur-sm'
       )}
     >
       <Container className="flex h-20 items-center justify-between gap-6">
         {/* Logo */}
         <Link
           href="/"
-          className="relative flex items-center gap-3 rounded-xl transition-transform duration-300 hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2"
+          className="relative flex items-center gap-3 rounded-xl transition-transform duration-300 hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-taxi-500 focus-visible:ring-offset-2"
         >
           <Image
             src="/inc/img/logo_taxi70.png"
@@ -52,7 +52,8 @@ export function Header() {
             width={110}
             height={40}
             priority
-            className="drop-shadow-sm"
+            className="drop-shadow-md"
+            style={{ height: 'auto' }}
           />
           <span className="sr-only">Taxi 70</span>
         </Link>
@@ -63,8 +64,8 @@ export function Header() {
             className={cn(
               'rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-200',
               pathname === '/'
-                ? 'bg-brand-100 text-brand-700'
-                : 'text-espresso-600 hover:bg-espresso-50 hover:text-espresso-900'
+                ? 'bg-taxi-500 text-night-900 shadow-button'
+                : 'text-night-700 hover:bg-taxi-100 hover:text-night-900'
             )}
             href="/"
           >
@@ -85,11 +86,11 @@ export function Header() {
                   pathname?.startsWith('/flughafentransfer') ||
                   pathname?.startsWith('/krankentransport') ||
                   pathname?.startsWith('/rollstuhltransport')
-                  ? 'bg-brand-100 text-brand-700'
-                  : 'text-espresso-600 hover:bg-espresso-50 hover:text-espresso-900'
+                  ? 'bg-taxi-500 text-night-900 shadow-button'
+                  : 'text-night-700 hover:bg-taxi-100 hover:text-night-900'
               )}
             >
-              Services
+              Service
               <svg
                 className={cn(
                   'h-4 w-4 transition-transform duration-200',
@@ -112,7 +113,7 @@ export function Header() {
                   exit={{ opacity: 0, y: -8 }}
                   transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
                 >
-                  <div className="w-72 rounded-2xl border border-espresso-100 bg-white p-2 shadow-large">
+                  <div className="w-72 rounded-2xl border border-taxi-200 bg-white p-2 shadow-large">
                     {services.map((s, i) => (
                       <m.div
                         key={s.href}
@@ -125,12 +126,12 @@ export function Header() {
                           className={cn(
                             'flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold transition-all duration-200',
                             pathname === s.href
-                              ? 'bg-brand-100 text-brand-700'
-                              : 'text-espresso-600 hover:bg-brand-50 hover:text-brand-700'
+                              ? 'bg-taxi-500 text-night-900'
+                              : 'text-night-700 hover:bg-taxi-100 hover:text-night-900'
                           )}
                           onClick={() => setServicesOpen(false)}
                         >
-                          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-100 text-brand-600">
+                          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-taxi-100 text-lg">
                             {s.href === '/transport' && '📦'}
                             {s.href === '/flughafentransfer' && '✈️'}
                             {s.href === '/krankentransport' && '🏥'}
@@ -150,8 +151,8 @@ export function Header() {
             className={cn(
               'rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-200',
               pathname === '/taxi70-in-muenster'
-                ? 'bg-brand-100 text-brand-700'
-                : 'text-espresso-600 hover:bg-espresso-50 hover:text-espresso-900'
+                ? 'bg-taxi-500 text-night-900 shadow-button'
+                : 'text-night-700 hover:bg-taxi-100 hover:text-night-900'
             )}
             href="/taxi70-in-muenster"
           >
@@ -161,8 +162,8 @@ export function Header() {
             className={cn(
               'rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-200',
               pathname === '/kontakt'
-                ? 'bg-brand-100 text-brand-700'
-                : 'text-espresso-600 hover:bg-espresso-50 hover:text-espresso-900'
+                ? 'bg-taxi-500 text-night-900 shadow-button'
+                : 'text-night-700 hover:bg-taxi-100 hover:text-night-900'
             )}
             href="/kontakt"
           >
@@ -174,7 +175,7 @@ export function Header() {
         <div className="hidden items-center gap-4 md:flex">
           <a
             href={phoneHref}
-            className="flex items-center gap-2 text-sm font-semibold text-espresso-600 transition-colors hover:text-brand-600"
+            className="flex items-center gap-2 text-sm font-bold text-night-800 transition-colors hover:text-taxi-700"
           >
             <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -189,7 +190,7 @@ export function Header() {
         {/* Mobile Menu Button */}
         <button
           type="button"
-          className="relative flex h-11 w-11 items-center justify-center rounded-xl border border-espresso-200 bg-white text-espresso-600 shadow-soft transition-all hover:border-brand-300 hover:bg-brand-50 hover:text-brand-600 md:hidden"
+          className="relative flex h-11 w-11 items-center justify-center rounded-xl border-2 border-taxi-400 bg-taxi-100 text-night-800 shadow-soft transition-all hover:border-taxi-500 hover:bg-taxi-200 md:hidden"
           aria-label="Menü öffnen"
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
@@ -221,7 +222,7 @@ export function Header() {
       <AnimatePresence>
         {open && (
           <m.div
-            className="border-t border-espresso-100 bg-white md:hidden"
+            className="border-t border-taxi-200 bg-gradient-to-b from-taxi-50 to-white md:hidden"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
@@ -230,20 +231,20 @@ export function Header() {
             <Container className="py-6">
               <div className="grid gap-2">
                 <Link
-                  className="rounded-xl px-4 py-3 font-semibold text-espresso-700 transition-all hover:bg-brand-50 hover:text-brand-700"
+                  className="rounded-xl px-4 py-3 font-semibold text-night-800 transition-all hover:bg-taxi-100"
                   href="/"
                   onClick={() => setOpen(false)}
                 >
                   Start
                 </Link>
 
-                <div className="mt-3 mb-2 px-4 text-xs font-bold uppercase tracking-wider text-espresso-400">
+                <div className="mt-3 mb-2 px-4 text-xs font-bold uppercase tracking-wider text-night-500">
                   Services
                 </div>
                 {services.map((s) => (
                   <Link
                     key={s.href}
-                    className="rounded-xl px-4 py-3 font-semibold text-espresso-600 transition-all hover:bg-brand-50 hover:text-brand-700"
+                    className="rounded-xl px-4 py-3 font-semibold text-night-700 transition-all hover:bg-taxi-100"
                     href={s.href}
                     onClick={() => setOpen(false)}
                   >
@@ -252,14 +253,14 @@ export function Header() {
                 ))}
 
                 <Link
-                  className="mt-2 rounded-xl px-4 py-3 font-semibold text-espresso-700 transition-all hover:bg-brand-50 hover:text-brand-700"
+                  className="mt-2 rounded-xl px-4 py-3 font-semibold text-night-800 transition-all hover:bg-taxi-100"
                   href="/taxi70-in-muenster"
                   onClick={() => setOpen(false)}
                 >
                   Taxi in Münster
                 </Link>
                 <Link
-                  className="rounded-xl px-4 py-3 font-semibold text-espresso-700 transition-all hover:bg-brand-50 hover:text-brand-700"
+                  className="rounded-xl px-4 py-3 font-semibold text-night-800 transition-all hover:bg-taxi-100"
                   href="/kontakt"
                   onClick={() => setOpen(false)}
                 >
@@ -269,7 +270,7 @@ export function Header() {
                 <div className="mt-4 grid gap-3">
                   <a
                     href={phoneHref}
-                    className="flex items-center justify-center gap-2 rounded-xl border border-espresso-200 bg-espresso-50 px-4 py-3 font-semibold text-espresso-700 transition-all hover:border-brand-300 hover:bg-brand-50 hover:text-brand-700"
+                    className="flex items-center justify-center gap-2 rounded-xl border-2 border-taxi-300 bg-taxi-50 px-4 py-3 font-bold text-night-800 transition-all hover:border-taxi-400 hover:bg-taxi-100"
                   >
                     <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />

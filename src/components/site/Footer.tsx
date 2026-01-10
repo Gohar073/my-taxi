@@ -8,14 +8,24 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative overflow-hidden border-t border-espresso-100 bg-gradient-section">
+    <footer className="relative overflow-hidden bg-night-900">
+      {/* Yellow accent stripe at top */}
+      <div className="absolute left-0 right-0 top-0 h-2 bg-taxi-500" />
+      
       {/* Decorative elements */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute -left-32 bottom-0 h-[300px] w-[300px] rounded-full bg-brand-100/50 blur-[80px]" />
-        <div className="absolute -right-32 top-0 h-[200px] w-[200px] rounded-full bg-sage-100/50 blur-[60px]" />
+      <div className="absolute inset-0">
+        <div className="absolute -left-32 bottom-0 h-[400px] w-[400px] rounded-full bg-taxi-500/10 blur-[100px]" />
+        <div className="absolute -right-32 top-0 h-[300px] w-[300px] rounded-full bg-taxi-500/5 blur-[80px]" />
+        
+        {/* Checkerboard accent */}
+        <div className="absolute bottom-0 left-0 right-0 h-1 flex">
+          {[...Array(100)].map((_, i) => (
+            <div key={i} className={`flex-1 ${i % 2 === 0 ? 'bg-taxi-500' : 'bg-transparent'}`} />
+          ))}
+        </div>
       </div>
 
-      <Container className="py-16 lg:py-20">
+      <Container className="relative py-16 lg:py-20">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
           {/* Brand column */}
           <div className="lg:col-span-5">
@@ -24,20 +34,21 @@ export function Footer() {
               alt="Taxi 70"
               width={130}
               height={48}
-              className="drop-shadow-sm"
+              className="drop-shadow-lg brightness-110"
+              style={{ height: 'auto' }}
             />
-            <p className="mt-6 max-w-sm text-base text-espresso-600 leading-relaxed">
+            <p className="mt-6 max-w-sm text-base leading-relaxed text-night-300">
               Zuverlässig. Schnell. Freundlich. Taxi 70 ist Ihr Partner für
               Fahrten in Münster/Hiltrup – 24/7 erreichbar.
             </p>
 
-            {/* Social links placeholder */}
+            {/* Social links */}
             <div className="mt-8 flex items-center gap-3">
               <a
                 href="https://de-de.facebook.com/taxihiltrupm/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-10 w-10 items-center justify-center rounded-xl border border-espresso-200 bg-white text-espresso-500 shadow-soft transition-all hover:border-brand-300 hover:bg-brand-50 hover:text-brand-600"
+                className="flex h-12 w-12 items-center justify-center rounded-xl bg-night-800 text-night-400 transition-all duration-300 hover:bg-taxi-500 hover:text-night-900"
                 aria-label="Facebook"
               >
                 <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
@@ -48,7 +59,7 @@ export function Footer() {
                 href="https://www.youtube.com/channel/UCrf94I3wUZKT5ZWpZ55cVVQ"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-10 w-10 items-center justify-center rounded-xl border border-espresso-200 bg-white text-espresso-500 shadow-soft transition-all hover:border-brand-300 hover:bg-brand-50 hover:text-brand-600"
+                className="flex h-12 w-12 items-center justify-center rounded-xl bg-night-800 text-night-400 transition-all duration-300 hover:bg-taxi-500 hover:text-night-900"
                 aria-label="YouTube"
               >
                 <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
@@ -60,25 +71,25 @@ export function Footer() {
 
           {/* Contact column */}
           <div className="lg:col-span-4">
-            <h3 className="text-sm font-bold uppercase tracking-wider text-espresso-900">
+            <h3 className="text-sm font-black uppercase tracking-wider text-taxi-500">
               Kontakt
             </h3>
-            <div className="mt-6 space-y-4">
-              <div className="flex items-start gap-3">
-                <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-brand-100 text-brand-600">
+            <div className="mt-6 space-y-5">
+              <div className="flex items-start gap-4">
+                <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-taxi-500 text-night-900">
                   <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
                 </div>
-                <div className="text-sm text-espresso-600">
-                  <div className="font-semibold text-espresso-800">{address.street}</div>
-                  <div>{address.zip} {address.city}</div>
+                <div>
+                  <div className="font-bold text-white">{address.street}</div>
+                  <div className="text-night-400">{address.zip} {address.city}</div>
                 </div>
               </div>
 
-              <div className="flex items-start gap-3">
-                <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-brand-100 text-brand-600">
+              <div className="flex items-start gap-4">
+                <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-taxi-500 text-night-900">
                   <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>
@@ -86,11 +97,11 @@ export function Footer() {
                 <div>
                   <a
                     href={phoneHref}
-                    className="text-lg font-bold text-brand-600 transition-colors hover:text-brand-700"
+                    className="text-xl font-black text-taxi-400 transition-colors hover:text-taxi-300"
                   >
                     {phoneNumber}
                   </a>
-                  <div className="text-sm text-espresso-500">24 Stunden erreichbar</div>
+                  <div className="text-sm text-night-400">24 Stunden erreichbar</div>
                 </div>
               </div>
             </div>
@@ -98,7 +109,7 @@ export function Footer() {
 
           {/* Legal column */}
           <div className="lg:col-span-3">
-            <h3 className="text-sm font-bold uppercase tracking-wider text-espresso-900">
+            <h3 className="text-sm font-black uppercase tracking-wider text-taxi-500">
               Rechtliches
             </h3>
             <nav className="mt-6 grid gap-3">
@@ -106,7 +117,7 @@ export function Footer() {
                 <Link
                   key={l.href}
                   href={l.href}
-                  className="text-sm font-medium text-espresso-600 transition-colors hover:text-brand-600"
+                  className="text-sm font-medium text-night-400 transition-colors hover:text-taxi-400"
                 >
                   {l.label}
                 </Link>
@@ -116,13 +127,13 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-espresso-200 pt-8 sm:flex-row">
-          <div className="text-sm text-espresso-500">
+        <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-night-700 pt-8 sm:flex-row">
+          <div className="text-sm text-night-400">
             © {currentYear} Taxi 70. Alle Rechte vorbehalten.
           </div>
-          <div className="flex items-center gap-6 text-sm text-espresso-500">
+          <div className="flex items-center gap-6 text-sm text-night-400">
             <span>Münster / Hiltrup</span>
-            <span className="h-1 w-1 rounded-full bg-espresso-300" />
+            <span className="h-2 w-2 rounded-full bg-taxi-500" />
             <span>Seit 2007</span>
           </div>
         </div>

@@ -170,7 +170,7 @@ export function BookingForm() {
       className="space-y-6"
       onSubmit={onSubmit}
     >
-      {/* Mode Selection */}
+      {/* Mode Selection - Yellow Theme */}
       <div className="flex flex-wrap gap-3">
         {(['Taxi Bestellung', 'Preisanfrage'] as const).map((mode) => (
           <button
@@ -178,10 +178,10 @@ export function BookingForm() {
             type="button"
             onClick={() => setState((s) => ({ ...s, mode }))}
             className={cn(
-              'flex-1 rounded-xl px-4 py-3 text-sm font-semibold transition-all duration-200',
+              'flex-1 rounded-xl px-4 py-3 text-sm font-bold transition-all duration-200',
               state.mode === mode
-                ? 'bg-brand-500 text-white shadow-button'
-                : 'bg-espresso-50 text-espresso-600 hover:bg-brand-50 hover:text-brand-700'
+                ? 'bg-taxi-500 text-night-900 shadow-button'
+                : 'bg-night-100 text-night-600 hover:bg-taxi-100 hover:text-night-900'
             )}
           >
             {mode}
@@ -282,9 +282,9 @@ export function BookingForm() {
         error={errors.phone}
       />
 
-      {/* Options */}
-      <div className="rounded-xl border border-espresso-100 bg-espresso-50/50 p-4">
-        <div className="mb-3 text-xs font-bold uppercase tracking-wider text-espresso-600">
+      {/* Options - Yellow Theme */}
+      <div className="rounded-xl border-2 border-taxi-200 bg-taxi-50 p-4">
+        <div className="mb-3 text-xs font-black uppercase tracking-wider text-night-700">
           Zusätzliche Optionen
         </div>
         <div className="flex flex-wrap gap-6">
@@ -329,7 +329,7 @@ export function BookingForm() {
         label={
           <span>
             Ich habe die{' '}
-            <a className="font-semibold text-brand-600 underline transition-colors hover:text-brand-700" href="/datenschutz">
+            <a className="font-bold text-taxi-700 underline transition-colors hover:text-taxi-600" href="/datenschutz">
               Datenschutzerklärung
             </a>{' '}
             gelesen und akzeptiere die Verarbeitung meiner Angaben.
@@ -367,7 +367,7 @@ export function BookingForm() {
           </div>
           <div>
             <div className="font-semibold text-success">Erfolgreich gesendet!</div>
-            <div className="mt-1 text-espresso-600">
+            <div className="mt-1 text-night-700">
               Vielen Dank! Ihre Anfrage wurde erfolgreich gesendet. Wir melden uns in Kürze bei Ihnen.
             </div>
           </div>
@@ -383,7 +383,7 @@ export function BookingForm() {
           </div>
           <div>
             <div className="font-semibold text-error">Fehler</div>
-            <div className="mt-1 text-espresso-600">{result.message}</div>
+            <div className="mt-1 text-night-700">{result.message}</div>
           </div>
         </div>
       )}

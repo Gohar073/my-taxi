@@ -40,22 +40,24 @@ export default function MuensterPage() {
       <PageHero
         title="Ihr Taxi in Münster"
         subtitle="Taxi 70 ist in Münster/Hiltrup und Umgebung für Sie unterwegs – zuverlässig, freundlich und flexibel."
+        icon="🚕"
+        image="/inc/img/hero/maik-winnecke-Epm5HX_Iwzs-unsplash.jpg"
       />
 
-      <section className="py-16 lg:py-24">
+      <section className="py-16 lg:py-24 bg-gradient-to-b from-surface-light to-surface-cream">
         <Container>
           <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
             {/* Main Content */}
             <div className="lg:col-span-7">
-              <div className="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-brand-50 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-brand-700">
+              <div className="inline-flex items-center gap-2 rounded-full border-2 border-taxi-400 bg-taxi-100 px-4 py-1.5 text-xs font-black uppercase tracking-wider text-night-900">
                 <span>🚕</span>
                 City Transfer
               </div>
 
-              <h2 className="mt-6 text-2xl font-bold text-espresso-900 sm:text-3xl">
+              <h2 className="mt-6 text-2xl font-black text-night-900 sm:text-3xl">
                 Ihr zuverlässiger Partner in Münster
               </h2>
-              <p className="mt-4 text-lg text-espresso-600 leading-relaxed">
+              <p className="mt-4 text-lg text-night-700 leading-relaxed font-medium">
                 Ob Innenstadt, Hiltrup, Bahnhof oder Umgebung: Wir bringen Sie ohne
                 Umwege an Ihren Wunsch-Zielort. Für Termine, Events oder einfach
                 bequem von A nach B.
@@ -66,13 +68,13 @@ export default function MuensterPage() {
                 {features.map((feature) => (
                   <div
                     key={feature.title}
-                    className="group rounded-2xl border border-espresso-100 bg-white p-5 shadow-soft transition-all hover:border-brand-200 hover:shadow-medium"
+                    className="group rounded-2xl border-2 border-night-100 bg-white p-5 shadow-card transition-all hover:border-taxi-400 hover:shadow-card-hover"
                   >
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-100 text-2xl transition-colors group-hover:bg-brand-500">
+                    <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-taxi-100 text-2xl transition-colors group-hover:bg-taxi-500">
                       {feature.icon}
                     </div>
-                    <h3 className="mt-4 font-bold text-espresso-900">{feature.title}</h3>
-                    <p className="mt-2 text-sm text-espresso-600">{feature.description}</p>
+                    <h3 className="mt-4 font-black text-night-900">{feature.title}</h3>
+                    <p className="mt-2 text-sm text-night-600">{feature.description}</p>
                   </div>
                 ))}
               </div>
@@ -92,9 +94,9 @@ export default function MuensterPage() {
             <div className="lg:col-span-5">
               <div className="sticky top-28 space-y-6">
                 {/* Booking Card */}
-                <div className="rounded-2xl border border-brand-200 bg-gradient-amber-soft p-6">
-                  <h3 className="text-lg font-bold text-espresso-900">Online bestellen</h3>
-                  <p className="mt-2 text-sm text-espresso-600">
+                <div className="rounded-2xl border-2 border-taxi-300 bg-taxi-100 p-6">
+                  <h3 className="text-lg font-black text-night-900">Online bestellen</h3>
+                  <p className="mt-2 text-sm text-night-700">
                     Nutzen Sie das Anfrageformular mit Abholzeit, Route und
                     Personenanzahl für eine schnelle Bearbeitung.
                   </p>
@@ -106,19 +108,19 @@ export default function MuensterPage() {
                 </div>
 
                 {/* Areas Card */}
-                <div className="rounded-2xl border border-sage-200 bg-sage-50 p-6">
+                <div className="rounded-2xl border-2 border-night-200 bg-night-900 p-6">
                   <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-sage-200 text-sage-700">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-taxi-500 text-night-900">
                       <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
                       </svg>
                     </div>
-                    <h4 className="font-bold text-espresso-900">Unser Einzugsgebiet</h4>
+                    <h4 className="font-black text-taxi-400">Unser Einzugsgebiet</h4>
                   </div>
-                  <ul className="mt-4 space-y-2 text-sm text-espresso-700">
+                  <ul className="mt-4 space-y-2 text-sm text-night-300">
                     {['Münster Innenstadt', 'Hiltrup', 'Amelsbüren', 'Wolbeck', 'und Umgebung'].map((area) => (
                       <li key={area} className="flex items-center gap-2">
-                        <svg className="h-4 w-4 flex-shrink-0 text-sage-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg className="h-4 w-4 flex-shrink-0 text-taxi-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                         </svg>
                         {area}
@@ -132,7 +134,7 @@ export default function MuensterPage() {
         </Container>
       </section>
 
-      <ServicesGrid className="border-t border-espresso-100" />
+      <ServicesGrid className="border-t-2 border-night-100" />
     </>
   );
 }

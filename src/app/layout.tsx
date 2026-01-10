@@ -30,7 +30,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#F5A623',
+  themeColor: '#FFD700',
 };
 
 export default function RootLayout({
@@ -40,7 +40,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="de">
-      <body className="min-h-dvh bg-surface-primary text-espresso-700 antialiased">
+      <body className="min-h-dvh bg-surface-light text-night-800 antialiased">
         <Script
           id="org-ld-json"
           type="application/ld+json"

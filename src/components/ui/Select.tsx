@@ -20,7 +20,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         {label && (
           <label
             htmlFor={selectId}
-            className="mb-2 block text-sm font-semibold text-espresso-700"
+            className="mb-2 block text-sm font-bold text-night-800"
           >
             {label}
             {props.required && <span className="ml-1 text-error">*</span>}
@@ -30,13 +30,13 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           <select
             ref={ref}
             className={cn(
-              'h-12 w-full appearance-none rounded-xl border bg-white px-4 pr-10 text-base font-medium',
-              'text-espresso-800',
+              'h-12 w-full appearance-none rounded-xl border-2 bg-white px-4 pr-10 text-base font-medium',
+              'text-night-900',
               'transition-all duration-200',
-              'border-espresso-200',
-              'hover:border-brand-300 hover:bg-surface-secondary',
-              'focus:border-brand-500 focus:bg-white focus:outline-none focus:ring-4 focus:ring-brand-100',
-              'disabled:cursor-not-allowed disabled:bg-espresso-50 disabled:text-espresso-400',
+              'border-night-200',
+              'hover:border-taxi-400 hover:bg-taxi-50',
+              'focus:border-taxi-500 focus:bg-white focus:outline-none focus:ring-4 focus:ring-taxi-100',
+              'disabled:cursor-not-allowed disabled:bg-night-50 disabled:text-night-400',
               error && 'border-error focus:border-error focus:ring-red-100',
               className
             )}
@@ -45,7 +45,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           >
             {children}
           </select>
-          <div className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-espresso-400">
+          <div className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-night-500">
             <svg
               className="h-5 w-5"
               fill="none"
@@ -62,7 +62,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           </div>
         </div>
         {hint && !error && (
-          <p className="mt-1.5 text-xs text-espresso-500">{hint}</p>
+          <p className="mt-1.5 text-xs text-night-500">{hint}</p>
         )}
         {error && (
           <p className="mt-1.5 flex items-center gap-1 text-xs font-medium text-error">

@@ -77,21 +77,22 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             {...props}
           />
           
-          {/* Custom checkbox visual - using inline styles for guaranteed visibility */}
+          {/* Custom checkbox visual - BOLD YELLOW TAXI THEME */}
           <span
-            className="mt-0.5 shrink-0 flex h-5 w-5 items-center justify-center rounded-md border-2 transition-all duration-200"
+            className="mt-0.5 shrink-0 flex h-6 w-6 items-center justify-center rounded-lg border-2 transition-all duration-200"
             style={{
-              backgroundColor: isChecked ? '#F5A623' : '#FFFFFF',
-              borderColor: isChecked ? '#F5A623' : (error ? '#EF4444' : '#D4CCC3'),
-              boxShadow: isChecked ? '0 0 0 3px rgba(245, 166, 35, 0.15)' : 'none',
+              backgroundColor: isChecked ? '#FFD700' : '#FFFFFF',
+              borderColor: isChecked ? '#FFD700' : (error ? '#EF4444' : '#1A1A1A'),
+              boxShadow: isChecked ? '0 0 0 4px rgba(255, 215, 0, 0.2)' : 'none',
             }}
           >
             {/* Checkmark */}
             <svg
-              className="h-3 w-3 text-white transition-all duration-200"
+              className="h-4 w-4 transition-all duration-200"
               style={{
                 opacity: isChecked ? 1 : 0,
                 transform: isChecked ? 'scale(1)' : 'scale(0)',
+                color: '#1A1A1A',
               }}
               viewBox="0 0 12 12"
               fill="none"
@@ -100,7 +101,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
               <path
                 d="M10 3L4.5 8.5L2 6"
                 stroke="currentColor"
-                strokeWidth="2"
+                strokeWidth="2.5"
                 strokeLinecap="round"
                 strokeLinejoin="round"
               />
@@ -109,7 +110,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           
           {/* Label text */}
           {label && (
-            <span className="text-sm font-medium text-espresso-600 transition-colors leading-relaxed">
+            <span className="text-sm font-medium text-night-700 transition-colors leading-relaxed">
               {label}
               {required && <span className="ml-1 text-error">*</span>}
             </span>
@@ -117,7 +118,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
         </div>
         
         {error && (
-          <p className="mt-1.5 ml-8 flex items-center gap-1 text-xs font-medium text-error">
+          <p className="mt-1.5 ml-9 flex items-center gap-1 text-xs font-medium text-error">
             <svg className="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
             </svg>
