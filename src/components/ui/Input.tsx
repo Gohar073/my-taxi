@@ -20,35 +20,39 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         {label && (
           <label
             htmlFor={inputId}
-            className="mb-2 block text-sm font-semibold text-taxi-gray-light"
+            className="mb-2 block text-sm font-semibold text-espresso-700"
           >
             {label}
-            {props.required && <span className="ml-1 text-taxi-error">*</span>}
+            {props.required && <span className="ml-1 text-error">*</span>}
           </label>
         )}
         <input
           type={type}
           ref={ref}
           className={cn(
-            'h-12 w-full rounded-xl border bg-taxi-surface-light/80 px-4 text-sm font-medium',
-            'text-taxi-gray-lightest placeholder:text-taxi-gray/60',
+            'h-12 w-full rounded-xl border bg-white px-4 text-base font-medium',
+            'text-espresso-800 placeholder:text-espresso-400',
             'transition-all duration-200',
-            'backdrop-blur-sm',
-            'border-taxi-gray/40',
-            'hover:border-taxi-secondary/40 hover:bg-taxi-surface-light',
-            'focus:border-taxi-secondary focus:bg-taxi-surface-light focus:outline-none focus:ring-2 focus:ring-taxi-secondary/30',
-            'disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:border-taxi-gray/40',
-            error && 'border-taxi-error focus:border-taxi-error focus:ring-taxi-error/30',
+            'border-espresso-200',
+            'hover:border-brand-300 hover:bg-surface-secondary',
+            'focus:border-brand-500 focus:bg-white focus:outline-none focus:ring-4 focus:ring-brand-100',
+            'disabled:cursor-not-allowed disabled:bg-espresso-50 disabled:text-espresso-400',
+            error && 'border-error focus:border-error focus:ring-red-100',
             className
           )}
           {...props}
           id={inputId}
         />
         {hint && !error && (
-          <p className="mt-1.5 text-xs text-taxi-gray/80">{hint}</p>
+          <p className="mt-1.5 text-xs text-espresso-500">{hint}</p>
         )}
         {error && (
-          <p className="mt-1.5 text-xs font-semibold text-taxi-error">{error}</p>
+          <p className="mt-1.5 flex items-center gap-1 text-xs font-medium text-error">
+            <svg className="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+            </svg>
+            {error}
+          </p>
         )}
       </div>
     );
@@ -56,4 +60,3 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 );
 
 Input.displayName = 'Input';
-

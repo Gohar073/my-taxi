@@ -7,7 +7,6 @@ import { Input } from '@/components/ui/Input';
 import { Textarea } from '@/components/ui/Textarea';
 import { Select } from '@/components/ui/Select';
 import { Checkbox } from '@/components/ui/Checkbox';
-import { Radio } from '@/components/ui/Radio';
 import { cn } from '@/lib/cn';
 
 type BookingMode = 'Taxi Bestellung' | 'Preisanfrage';
@@ -168,38 +167,30 @@ export function BookingForm() {
     <form
       id="bestellen"
       aria-labelledby={`${formId}-title`}
-      className="rounded-3xl border border-taxi-gray/30 bg-gradient-card p-8 shadow-glass backdrop-blur-xl md:p-10"
+      className="space-y-6"
       onSubmit={onSubmit}
     >
-      <div className="mb-8 border-b border-taxi-gray/20 pb-6">
-        <h2 id={`${formId}-title`} className="text-2xl font-black tracking-tight text-taxi-surface-bright md:text-3xl">
-          Taxi bestellen / Preisanfrage
-        </h2>
-        <p className="mt-2 text-sm text-taxi-gray-light leading-relaxed">
-          Schnell anfragen – wir melden uns zeitnah zurück.
-        </p>
+      {/* Mode Selection */}
+      <div className="flex flex-wrap gap-3">
+        {(['Taxi Bestellung', 'Preisanfrage'] as const).map((mode) => (
+          <button
+            key={mode}
+            type="button"
+            onClick={() => setState((s) => ({ ...s, mode }))}
+            className={cn(
+              'flex-1 rounded-xl px-4 py-3 text-sm font-semibold transition-all duration-200',
+              state.mode === mode
+                ? 'bg-brand-500 text-white shadow-button'
+                : 'bg-espresso-50 text-espresso-600 hover:bg-brand-50 hover:text-brand-700'
+            )}
+          >
+            {mode}
+          </button>
+        ))}
       </div>
 
-      <div className="grid gap-6 sm:grid-cols-2">
-        <fieldset className="col-span-full rounded-2xl border border-taxi-gray/30 bg-gradient-glass p-5 backdrop-blur-md">
-          <legend className="px-3 text-sm font-bold uppercase tracking-wider text-taxi-gray-light">
-            Anfrage-Art
-          </legend>
-          <div className="mt-4 flex flex-wrap gap-6">
-            {(['Taxi Bestellung', 'Preisanfrage'] as const).map((mode) => (
-              <Radio
-                key={mode}
-                name="mode"
-                value={mode}
-                checked={state.mode === mode}
-                onChange={() => setState((s) => ({ ...s, mode }))}
-                label={mode}
-                className="flex-1 min-w-[140px]"
-              />
-            ))}
-          </div>
-        </fieldset>
-
+      {/* Date & Time */}
+      <div className="grid gap-4 sm:grid-cols-2">
         <Input
           label="Datum"
           type="text"
@@ -210,7 +201,6 @@ export function BookingForm() {
           required
           error={errors.date}
         />
-
         <Input
           label="Uhrzeit"
           type="text"
@@ -221,46 +211,46 @@ export function BookingForm() {
           required
           error={errors.time}
         />
+      </div>
 
-        <div className="sm:col-span-2">
-          <Select
-            label="Anzahl"
-            value={state.passengers}
-            onChange={(e) =>
-              setState((s) => ({ ...s, passengers: e.target.value }))
-            }
-            required
-            error={errors.passengers}
-            hint='Mehr? Bitte in "Nachricht" angeben.'
-          >
-            {passengerOptions.map((o) => (
-              <option key={o.value} value={o.value} className="bg-taxi-surface-light">
-                {o.label}
-              </option>
-            ))}
-          </Select>
-        </div>
+      {/* Passengers */}
+      <Select
+        label="Anzahl Personen"
+        value={state.passengers}
+        onChange={(e) => setState((s) => ({ ...s, passengers: e.target.value }))}
+        required
+        error={errors.passengers}
+        hint='Mehr? Bitte in "Nachricht" angeben.'
+      >
+        {passengerOptions.map((o) => (
+          <option key={o.value} value={o.value}>
+            {o.label}
+          </option>
+        ))}
+      </Select>
 
+      {/* Route */}
+      <div className="space-y-4">
         <Input
           label="Von"
           value={state.from}
           onChange={(e) => setState((s) => ({ ...s, from: e.target.value }))}
-          placeholder="Abholort"
+          placeholder="Abholort eingeben"
           required
           error={errors.from}
-          className="sm:col-span-2"
         />
-
         <Input
           label="Nach"
           value={state.to}
           onChange={(e) => setState((s) => ({ ...s, to: e.target.value }))}
-          placeholder="Zielort"
+          placeholder="Zielort eingeben"
           required
           error={errors.to}
-          className="sm:col-span-2"
         />
+      </div>
 
+      {/* Contact Info */}
+      <div className="grid gap-4 sm:grid-cols-2">
         <Input
           label="Name"
           value={state.name}
@@ -269,7 +259,6 @@ export function BookingForm() {
           required
           error={errors.name}
         />
-
         <Input
           label="E-Mail"
           type="email"
@@ -280,97 +269,124 @@ export function BookingForm() {
           required
           error={errors.email}
         />
+      </div>
 
-        <Input
-          label="Telefon"
-          type="tel"
-          value={state.phone}
-          onChange={(e) => setState((s) => ({ ...s, phone: e.target.value }))}
-          placeholder="+49 …"
-          autoComplete="tel"
-          required
-          error={errors.phone}
-          className="sm:col-span-2"
-        />
+      <Input
+        label="Telefon"
+        type="tel"
+        value={state.phone}
+        onChange={(e) => setState((s) => ({ ...s, phone: e.target.value }))}
+        placeholder="+49 ..."
+        autoComplete="tel"
+        required
+        error={errors.phone}
+      />
 
-        <fieldset className="sm:col-span-2 rounded-2xl border border-taxi-gray/30 bg-gradient-glass p-5 backdrop-blur-md">
-          <legend className="px-3 text-sm font-bold uppercase tracking-wider text-taxi-gray-light">
-            Optionen
-          </legend>
-          <div className="mt-4 flex flex-wrap gap-6">
-            <Checkbox
-              checked={state.wheelchair}
-              onChange={(e) =>
-                setState((s) => ({ ...s, wheelchair: e.target.checked }))
-              }
-              label="Rollstuhltransport"
-            />
-            <Checkbox
-              checked={state.childSeat}
-              onChange={(e) =>
-                setState((s) => ({ ...s, childSeat: e.target.checked }))
-              }
-              label="Kindersitz benötigt"
-            />
-          </div>
-        </fieldset>
-
-        <div className="sm:col-span-2">
-          <Textarea
-            label="Nachricht"
-            value={state.message}
-            onChange={(e) => setState((s) => ({ ...s, message: e.target.value }))}
-            placeholder="Optional: Details (z.B. Flugnummer, Gepäck, Abholpunkt …)"
-            rows={5}
-          />
+      {/* Options */}
+      <div className="rounded-xl border border-espresso-100 bg-espresso-50/50 p-4">
+        <div className="mb-3 text-xs font-bold uppercase tracking-wider text-espresso-600">
+          Zusätzliche Optionen
         </div>
-
-        <input
-          className="hidden"
-          tabIndex={-1}
-          autoComplete="off"
-          name="website"
-          value={state.website}
-          onChange={(e) => setState((s) => ({ ...s, website: e.target.value }))}
-        />
-
-        <div className="sm:col-span-2">
+        <div className="flex flex-wrap gap-6">
           <Checkbox
-            checked={state.dsgvo}
-            onChange={(e) => setState((s) => ({ ...s, dsgvo: e.target.checked }))}
-            required
-            error={errors.dsgvo}
-            label={
-              <span>
-                Ich habe die{' '}
-                <a className="font-bold text-taxi-secondary underline hover:text-taxi-accent transition-colors" href="/datenschutz">
-                  Datenschutzerklärung
-                </a>{' '}
-                gelesen und akzeptiere die Verarbeitung meiner Angaben.
-              </span>
-            }
+            checked={state.wheelchair}
+            onChange={() => setState((s) => ({ ...s, wheelchair: !s.wheelchair }))}
+            label="Rollstuhltransport"
           />
-        </div>
-
-        <div className="sm:col-span-2">
-          <Button type="submit" disabled={!canSubmit}>
-            {submitting ? 'Senden…' : 'Anfrage senden'}
-          </Button>
-
-          {result.status === 'success' ? (
-            <div className="mt-4 rounded-2xl border border-taxi-success/60 bg-taxi-success/25 backdrop-blur-md px-5 py-4 text-sm font-bold text-taxi-success shadow-medium animate-fade-in">
-              ✓ Danke! Ihre Anfrage wurde erfolgreich gesendet.
-            </div>
-          ) : null}
-
-          {result.status === 'error' ? (
-            <div className="mt-4 rounded-2xl border border-taxi-error/60 bg-taxi-error/25 backdrop-blur-md px-5 py-4 text-sm font-bold text-taxi-error shadow-medium animate-fade-in">
-              ✗ {result.message}
-            </div>
-          ) : null}
+          <Checkbox
+            checked={state.childSeat}
+            onChange={() => setState((s) => ({ ...s, childSeat: !s.childSeat }))}
+            label="Kindersitz benötigt"
+          />
         </div>
       </div>
+
+      {/* Message */}
+      <Textarea
+        label="Nachricht (optional)"
+        value={state.message}
+        onChange={(e) => setState((s) => ({ ...s, message: e.target.value }))}
+        placeholder="Details: Flugnummer, Gepäck, Abholpunkt ..."
+        rows={4}
+      />
+
+      {/* Honeypot */}
+      <input
+        className="hidden"
+        tabIndex={-1}
+        autoComplete="off"
+        name="website"
+        value={state.website}
+        onChange={(e) => setState((s) => ({ ...s, website: e.target.value }))}
+      />
+
+      {/* Privacy */}
+      <Checkbox
+        checked={state.dsgvo}
+        onChange={() => setState((s) => ({ ...s, dsgvo: !s.dsgvo }))}
+        required
+        error={errors.dsgvo}
+        label={
+          <span>
+            Ich habe die{' '}
+            <a className="font-semibold text-brand-600 underline transition-colors hover:text-brand-700" href="/datenschutz">
+              Datenschutzerklärung
+            </a>{' '}
+            gelesen und akzeptiere die Verarbeitung meiner Angaben.
+          </span>
+        }
+      />
+
+      {/* Submit */}
+      <Button type="submit" disabled={!canSubmit} className="w-full">
+        {submitting ? (
+          <span className="flex items-center gap-2">
+            <svg className="h-5 w-5 animate-spin" viewBox="0 0 24 24" fill="none">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+            </svg>
+            Senden...
+          </span>
+        ) : (
+          <span className="flex items-center gap-2">
+            <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+            </svg>
+            Anfrage senden
+          </span>
+        )}
+      </Button>
+
+      {/* Result Messages */}
+      {result.status === 'success' && (
+        <div className="flex items-start gap-3 rounded-xl border border-success/30 bg-green-50 p-4 text-sm animate-fade-in">
+          <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-success text-white">
+            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <div>
+            <div className="font-semibold text-success">Erfolgreich gesendet!</div>
+            <div className="mt-1 text-espresso-600">
+              Vielen Dank! Ihre Anfrage wurde erfolgreich gesendet. Wir melden uns in Kürze bei Ihnen.
+            </div>
+          </div>
+        </div>
+      )}
+
+      {result.status === 'error' && (
+        <div className="flex items-start gap-3 rounded-xl border border-error/30 bg-red-50 p-4 text-sm animate-fade-in">
+          <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-error text-white">
+            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </div>
+          <div>
+            <div className="font-semibold text-error">Fehler</div>
+            <div className="mt-1 text-espresso-600">{result.message}</div>
+          </div>
+        </div>
+      )}
     </form>
   );
 }
-

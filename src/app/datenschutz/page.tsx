@@ -6,7 +6,7 @@ import { address, phoneNumber } from '@/lib/navigation';
 
 export const metadata: Metadata = {
   title: 'Datenschutz',
-  description: 'Datenschutzerklärung für diese Website (Replica).',
+  description: 'Datenschutzerklärung für diese Website.',
 };
 
 export default function PrivacyPage() {
@@ -14,86 +14,113 @@ export default function PrivacyPage() {
     <>
       <PageHero
         title="Datenschutz­erklärung"
-        subtitle="Letzte Änderung: 14.07.2024 (Inhalt angelehnt an die Struktur der Originalseite)"
+        subtitle="Letzte Änderung: 14.07.2024"
       />
 
-      <section className="py-12 bg-gradient-surface">
-        <Container className="space-y-10">
-          <div className="rounded-3xl border border-taxi-gray/30 bg-gradient-card p-6 shadow-medium">
-            <h2 className="text-lg font-black tracking-tight text-taxi-surface-bright">Vorwort</h2>
-            <p className="mt-3 text-sm text-taxi-gray-light">
-              Datenschutz hat einen besonders hohen Stellenwert. Die Nutzung
-              dieser Website ist grundsätzlich ohne Angabe personenbezogener
-              Daten möglich. Wenn Sie über das Anfrageformular Kontakt aufnehmen,
-              werden die von Ihnen übermittelten Daten zur Bearbeitung der Anfrage
-              verarbeitet.
-            </p>
-          </div>
+      <section className="py-16 lg:py-24">
+        <Container size="narrow">
+          <div className="space-y-8">
+            {/* Vorwort */}
+            <div className="rounded-2xl border border-espresso-100 bg-white p-6 shadow-soft sm:p-8">
+              <h2 className="text-lg font-bold text-espresso-900">Vorwort</h2>
+              <p className="mt-4 text-espresso-600 leading-relaxed">
+                Datenschutz hat einen besonders hohen Stellenwert. Die Nutzung
+                dieser Website ist grundsätzlich ohne Angabe personenbezogener
+                Daten möglich. Wenn Sie über das Anfrageformular Kontakt aufnehmen,
+                werden die von Ihnen übermittelten Daten zur Bearbeitung der Anfrage
+                verarbeitet.
+              </p>
+            </div>
 
-          <div className="rounded-3xl border border-taxi-gray/30 bg-gradient-card p-6 shadow-medium">
-            <h2 className="text-lg font-black tracking-tight text-taxi-surface-bright">Allgemeine Hinweise</h2>
-            <p className="mt-3 text-sm text-taxi-gray-light">
-              Personenbezogene Daten sind alle Daten, mit denen Sie persönlich
-              identifiziert werden können. Diese Erklärung informiert darüber,
-              welche Daten wir erheben, wofür wir sie nutzen und wie das geschieht.
-            </p>
-          </div>
+            {/* Allgemeine Hinweise */}
+            <div className="rounded-2xl border border-espresso-100 bg-white p-6 shadow-soft sm:p-8">
+              <h2 className="text-lg font-bold text-espresso-900">Allgemeine Hinweise</h2>
+              <p className="mt-4 text-espresso-600 leading-relaxed">
+                Personenbezogene Daten sind alle Daten, mit denen Sie persönlich
+                identifiziert werden können. Diese Erklärung informiert darüber,
+                welche Daten wir erheben, wofür wir sie nutzen und wie das geschieht.
+              </p>
+            </div>
 
-          <div className="rounded-3xl border border-taxi-gray/30 bg-gradient-card p-6 shadow-medium">
-            <h2 className="text-lg font-black tracking-tight">
-              Datenerfassung auf unserer Website
-            </h2>
-            <h3 className="mt-4 text-sm font-black text-taxi-surface-bright">Wer ist verantwortlich?</h3>
-            <p className="mt-2 text-sm text-taxi-gray-light">
-              Verantwortliche Stelle (in Anlehnung an die Originalseite):{' '}
-              <br />
-              Taxibetrieb Sajid Mehmood, {address.street}, {address.zip}{' '}
-              {address.city}, Telefon: {phoneNumber}
-            </p>
+            {/* Datenerfassung */}
+            <div className="rounded-2xl border border-espresso-100 bg-white p-6 shadow-soft sm:p-8">
+              <h2 className="text-lg font-bold text-espresso-900">
+                Datenerfassung auf unserer Website
+              </h2>
 
-            <h3 className="mt-5 text-sm font-black text-taxi-surface-bright">Wie erfassen wir Daten?</h3>
-            <p className="mt-2 text-sm text-taxi-gray-light">
-              Daten werden zum einen dadurch erhoben, dass Sie sie uns mitteilen
-              (z.B. über das Anfrageformular). Andere Daten können automatisch beim
-              Besuch der Website durch IT-Systeme erfasst werden (z.B. Server-Log-Dateien).
-            </p>
-          </div>
+              <div className="mt-6 space-y-6">
+                <div>
+                  <h3 className="font-semibold text-espresso-800">Wer ist verantwortlich?</h3>
+                  <p className="mt-2 text-espresso-600">
+                    Verantwortliche Stelle:{' '}
+                    <br />
+                    Taxibetrieb Sajid Mehmood
+                    <br />
+                    {address.street}, {address.zip} {address.city}
+                    <br />
+                    Telefon: {phoneNumber}
+                  </p>
+                </div>
 
-          <div className="rounded-3xl border border-taxi-gray/30 bg-gradient-card p-6 shadow-medium">
-            <h2 className="text-lg font-black tracking-tight text-taxi-surface-bright">
-              Cookies & Analyse-Tools
-            </h2>
-            <p className="mt-3 text-sm text-taxi-gray-light">
-              Diese Replica setzt standardmäßig keine Tracking-Tools ein. Je nach
-              Hosting/Integration (z.B. Vercel Analytics) können zusätzliche Dienste
-              aktiviert werden. Prüfen Sie dies vor Livegang.
-            </p>
-          </div>
+                <div>
+                  <h3 className="font-semibold text-espresso-800">Wie erfassen wir Daten?</h3>
+                  <p className="mt-2 text-espresso-600">
+                    Daten werden zum einen dadurch erhoben, dass Sie sie uns mitteilen
+                    (z.B. über das Anfrageformular). Andere Daten können automatisch beim
+                    Besuch der Website durch IT-Systeme erfasst werden (z.B. Server-Log-Dateien).
+                  </p>
+                </div>
+              </div>
+            </div>
 
-          <div className="rounded-3xl border border-taxi-gray/30 bg-gradient-card p-6 shadow-medium">
-            <h2 className="text-lg font-black tracking-tight text-taxi-surface-bright">Kontaktformular</h2>
-            <p className="mt-3 text-sm text-taxi-gray-light">
-              Wenn Sie uns per Formular Anfragen zukommen lassen, werden Ihre Angaben
-              aus dem Formular inklusive der von Ihnen dort angegebenen Kontaktdaten
-              zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei
-              uns verarbeitet. Die Übermittlung kann optional an eine von Ihnen
-              konfigurierte Webhook-URL weitergeleitet werden (siehe Projekt-README).
-            </p>
-          </div>
+            {/* Cookies */}
+            <div className="rounded-2xl border border-espresso-100 bg-white p-6 shadow-soft sm:p-8">
+              <h2 className="text-lg font-bold text-espresso-900">
+                Cookies & Analyse-Tools
+              </h2>
+              <p className="mt-4 text-espresso-600 leading-relaxed">
+                Diese Website setzt standardmäßig keine Tracking-Tools ein. Je nach
+                Hosting/Integration können zusätzliche Dienste aktiviert werden.
+              </p>
+            </div>
 
-          <div className="rounded-3xl border border-taxi-secondary/30 bg-gradient-to-br from-taxi-secondary/15 to-taxi-secondary/5 p-6 shadow-medium">
-            <h2 className="text-lg font-black tracking-tight text-taxi-surface-bright">Ihre Rechte</h2>
-            <ul className="mt-3 grid list-disc gap-2 pl-5 text-sm text-taxi-gray-light">
-              <li>Auskunft über gespeicherte Daten</li>
-              <li>Berichtigung oder Löschung</li>
-              <li>Einschränkung der Verarbeitung</li>
-              <li>Widerspruch gegen die Verarbeitung</li>
-              <li>Datenübertragbarkeit</li>
-            </ul>
+            {/* Kontaktformular */}
+            <div className="rounded-2xl border border-espresso-100 bg-white p-6 shadow-soft sm:p-8">
+              <h2 className="text-lg font-bold text-espresso-900">Kontaktformular</h2>
+              <p className="mt-4 text-espresso-600 leading-relaxed">
+                Wenn Sie uns per Formular Anfragen zukommen lassen, werden Ihre Angaben
+                aus dem Formular inklusive der von Ihnen dort angegebenen Kontaktdaten
+                zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei
+                uns verarbeitet.
+              </p>
+            </div>
+
+            {/* Ihre Rechte */}
+            <div className="rounded-2xl border border-brand-200 bg-brand-50 p-6 sm:p-8">
+              <h2 className="text-lg font-bold text-espresso-900">Ihre Rechte</h2>
+              <p className="mt-4 text-espresso-600">
+                Sie haben jederzeit das Recht auf:
+              </p>
+              <ul className="mt-4 grid gap-2 text-espresso-700">
+                {[
+                  'Auskunft über gespeicherte Daten',
+                  'Berichtigung oder Löschung',
+                  'Einschränkung der Verarbeitung',
+                  'Widerspruch gegen die Verarbeitung',
+                  'Datenübertragbarkeit',
+                ].map((right) => (
+                  <li key={right} className="flex items-center gap-3">
+                    <svg className="h-5 w-5 flex-shrink-0 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    {right}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </Container>
       </section>
     </>
   );
 }
-
