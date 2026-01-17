@@ -6,7 +6,7 @@ import { address, phoneHref, phoneNumber } from '@/lib/navigation';
 
 export const metadata: Metadata = {
   title: 'Kontaktmöglichkeiten',
-  description: 'Kontakt zu Taxi 70: telefonisch 24/7 erreichbar und Standort in Münster.',
+  description: 'Kontakt zu Taxi Münster: telefonisch 24/7 erreichbar und Standort in Münster.',
 };
 
 export default function ContactPage() {
@@ -109,7 +109,7 @@ export default function ContactPage() {
                 />
               </div>
               <p className="mt-4 text-center text-sm text-night-600 font-medium">
-                📍 Münster / Hiltrup - Taxi 70 Standort
+                📍 Münster / Hiltrup - Taxi Münster Standort
               </p>
             </div>
           </div>
