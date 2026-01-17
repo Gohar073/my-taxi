@@ -1,5 +1,5 @@
-export const phoneNumber = '+49 172 5802357';
-export const phoneHref = 'tel:+491725802357';
+export const phoneNumber = '+49 172 58023577';
+export const phoneHref = 'tel:+4917258023577';
 
 export const address = {
   street: 'Fugger Straße 15',
