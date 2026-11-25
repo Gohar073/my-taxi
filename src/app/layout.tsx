@@ -59,7 +59,7 @@ export default function RootLayout({
                 '@type': 'PostalAddress',
                 streetAddress: 'Fugger Straße 15',
                 addressLocality: 'Münster',
-                postalCode: '48165',
+                postalCode: '48157',
                 addressCountry: 'DE',
                 addressRegion: 'Nordrhein-Westfalen',
               },

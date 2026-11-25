@@ -21,7 +21,7 @@ export default function ImprintPage() {
             <div className="mt-3 space-y-1 text-sm text-black/80">
               <div>Taxibetrieb Sajid Mehmood</div>
               <div>Inhaber: Sajid Mehmood</div>
-              <div>Anschrift: Fuggerstraße 15, 48165 Münster, Deutschland</div>
+              <div>Anschrift: Fuggerstraße 15, 48157 Münster, Deutschland</div>
               <div>Telefon: 0172 / 58 02 35 7</div>
               <div className="text-black/60">
                 E-Mail: (auf der Originalseite ggf. JavaScript-geschützt)

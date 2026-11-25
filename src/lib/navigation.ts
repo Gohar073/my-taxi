@@ -3,7 +3,7 @@ export const phoneHref = 'tel:+491702452706';
 
 export const address = {
   street: 'Fugger Straße 15',
-  zip: '48165',
+  zip: '48157',
   city: 'Münster',
 };
 
